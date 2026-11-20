@@ -40,7 +40,7 @@ RELEVANT_FEATURES = {
 }
 
 
-# --- Backend Logic ---
+#Backend i think
 @st.cache_data(ttl=3600)
 def fetch_uniprot_data(accession: str) -> dict:
     """Fetch protein metadata, sequence, and features from UniProt REST API."""
@@ -134,7 +134,7 @@ def analyze_variants(raw_variants: str, protein: dict) -> tuple[pd.DataFrame, li
             if f["start"] <= pos <= f["end"]
         ]
 
-        # Simple heuristic impact score
+        #impct score
         impact_score = 0
         if wt_props["group"] != mut_props["group"]:
             impact_score += 1
@@ -172,7 +172,7 @@ def plot_protein_map(protein: dict, variants_df: pd.DataFrame) -> go.Figure:
     fig = go.Figure()
     seq_len = protein["length"]
 
-    # Base protein backbone bar
+    #protein
     fig.add_trace(go.Scatter(
         x=[1, seq_len],
         y=[0, 0],
@@ -182,7 +182,7 @@ def plot_protein_map(protein: dict, variants_df: pd.DataFrame) -> go.Figure:
         hoverinfo="skip",
     ))
 
-    # Functional domains / features
+    #proten feature
     palette = ["#3B82F6", "#10B981", "#8B5CF6", "#F59E0B", "#06B6D4"]
     for idx, feat in enumerate(protein["features"]):
         color = palette[idx % len(palette)]
@@ -199,7 +199,7 @@ def plot_protein_map(protein: dict, variants_df: pd.DataFrame) -> go.Figure:
             ),
         ))
 
-    # Mutation markers
+    #mutate marker
     if not variants_df.empty:
         color_map = {"High": "#EF4444", "Moderate": "#F97316", "Low": "#22C55E"}
         for _, row in variants_df.iterrows():
@@ -239,8 +239,7 @@ st.set_page_config(page_title="Protein Variant Explorer", page_icon="🧬", layo
 
 st.title(" Protein Variant and  Mutation ")
 st.markdown(
-    "Analyze missense mutations against live **UniProt** sequences, "
-    "functional domains, and amino acid biochemical shifts."
+    "Analyze Protein from Uniprot "
 )
 
 with st.sidebar:
