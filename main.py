@@ -46,7 +46,7 @@ def fetch_uniprot_data(accession: str) -> dict:
     """Fetch protein metadata, sequence, and features from UniProt REST API."""
     accession = accession.strip().upper()
     if not accession:
-        raise ValueError("Please enter a UniProt accession ID.")
+        raise ValueError("Please enter a UniProt code ID.")
     url = f"https://rest.uniprot.org/uniprotkb/{accession}.json"
     response = requests.get(url, timeout=10)
     if response.status_code != 200:
@@ -168,7 +168,7 @@ def analyze_variants(raw_variants: str, protein: dict) -> tuple[pd.DataFrame, li
 
 
 def plot_protein_map(protein: dict, variants_df: pd.DataFrame) -> go.Figure:
-    """Create an interactive Plotly linear domain and mutation track."""
+    """Linear domain and mutation."""
     fig = go.Figure()
     seq_len = protein["length"]
 
