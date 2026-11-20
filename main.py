@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-# --- Biochemical Reference Data ---
+#chemical chart
 AA_PROPERTIES = {
     "A": {"name": "Alanine", "charge": 0, "hydro": 1.8, "mw": 89.1, "group": "Nonpolar"},
     "R": {"name": "Arginine", "charge": 1, "hydro": -4.5, "mw": 174.2, "group": "Positive"},
@@ -234,7 +234,7 @@ def plot_protein_map(protein: dict, variants_df: pd.DataFrame) -> go.Figure:
     return fig
 
 
-# UI
+#UI
 st.set_page_config(page_title="Protein Variant Explorer", page_icon="🧬", layout="wide")
 
 st.title(" Protein Variant and  Mutation ")
@@ -272,10 +272,10 @@ if run_btn or uniprot_id:
         for err in errors:
             st.warning(err)
 
-        # Interactive Sequence & Domain Map
+        #domain chart
         st.plotly_chart(plot_protein_map(protein, variants_df), use_container_width=True)
 
-        # Variant Analysis Table
+        #main table
         if not variants_df.empty:
             st.subheader("Variant Biochemical & Domain Impact")
             st.dataframe(variants_df, use_container_width=True, hide_index=True)
@@ -287,7 +287,7 @@ if run_btn or uniprot_id:
                 mime="text/csv",
             )
 
-        # Expander for full sequence & domain table
+        #chart expand
         with st.expander("View Annotated UniProt Domains & Reference Sequence"):
             if protein["features"]:
                 st.dataframe(
