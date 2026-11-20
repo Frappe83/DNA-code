@@ -247,7 +247,7 @@ with st.sidebar:
     uniprot_id = st.text_input("UniProt Accession ID", value="P04637", help="Example: P04637 (TP53), P00533 (EGFR)")
     variants_input = st.text_area(
         "Missense Variants (comma or newline separated)",
-        value=""
+        value="",
         height=140,
     )
     run_btn = st.button("Analyze Variants", type="primary", use_container_width=True)
